@@ -5,6 +5,9 @@
  */
 package uam.pvoe.pf.formas;
 
+import javax.swing.JOptionPane;
+import uam.pvoe.pf.compartido.Compartido;
+
 /**
  *
  * @author Cristian Emanuel Ceron Franco
@@ -16,6 +19,7 @@ public class MenuFrm extends javax.swing.JFrame {
      */
     public MenuFrm() {
         initComponents();
+        lblNombre.setText(Compartido.nombreUsuario);
     }
 
     /**
@@ -40,6 +44,8 @@ public class MenuFrm extends javax.swing.JFrame {
         btnOpcionC = new javax.swing.JButton();
         lblConsulta = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JButton();
+        lblBienvenido = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -175,21 +181,36 @@ public class MenuFrm extends javax.swing.JFrame {
             }
         });
 
+        lblBienvenido.setText("Bienvenido");
+
+        lblNombre.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCerrarSesion)
-                    .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCerrarSesion)
+                            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(lblBienvenido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblNombre)))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBienvenido)
+                    .addComponent(lblNombre))
+                .addGap(27, 27, 27)
                 .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(btnCerrarSesion)
@@ -229,13 +250,19 @@ public class MenuFrm extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this,
+        int confirmacion = JOptionPane.showConfirmDialog(this,
                 "¿Está seguro de que desea cerrar sesión?",
                 "Cerrar Sesión",
-                javax.swing.JOptionPane.YES_NO_OPTION,
-                javax.swing.JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
 
-        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Limpiamos los datos de la sesión actual en la clase Compartido
+            Compartido.login = null;
+            Compartido.tipoUsuario = null;
+            Compartido.nombreUsuario = null;
+            Compartido.idAsistenteSeleccionado = null;
+
             this.dispose();
 
             LoginFrm login = new LoginFrm();
@@ -292,8 +319,10 @@ public class MenuFrm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdministracion;
+    private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsulta;
     private javax.swing.JLabel lblInscribir;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlContenedor;
     // End of variables declaration//GEN-END:variables

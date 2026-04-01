@@ -277,7 +277,7 @@ public class RegistroAsistenteFrm extends javax.swing.JFrame {
             return;
         }
 
-        if (!tel1.matches("^[0-9]{10}$") || (!tel2.isEmpty() && !tel2.matches("^[0-9]+$"))) {
+        if (!tel1.matches("^[0-9]{1,10}$") || (!tel2.isEmpty() && !tel2.matches("^[0-9]{1,10}$"))) {
             JOptionPane.showMessageDialog(this,
                     "Los números de teléfono deben contener solo dígitos y tener 10 números.",
                     "Error de Formato", JOptionPane.ERROR_MESSAGE);

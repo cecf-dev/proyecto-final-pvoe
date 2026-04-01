@@ -22,7 +22,6 @@ public class Usuario {
         this.rol = rol;
     }
 
-    // Getters
     public String getUsername() {
         return username;
     }

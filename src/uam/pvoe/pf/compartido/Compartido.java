@@ -5,7 +5,6 @@
 package uam.pvoe.pf.compartido;
 
 import java.util.LinkedList;
-import uam.pvoe.pf.clases.Asistente;
 import uam.pvoe.pf.clases.Taller;
 
 /**
@@ -17,12 +16,12 @@ import uam.pvoe.pf.clases.Taller;
 public class Compartido {
     
    
-    /* * Datos de la sesión de la encargada del sistema[
+    /* * Datos de la sesión de la encargada del sistema
      * Estos se llenan al validar el usuario en el Login
      */
-    public static String login;         // Identificador (ej. adminCC, encargada1) 
-    public static String tipoUsuario;   // Rol: ADMIN o STAFF (reemplaza a admin/usr de la práctica) 
-    public static String nombreUsuario; // Nombre legible para el mensaje de bienvenida 
+    public static String login;         
+    public static String tipoUsuario;   
+    public static String nombreUsuario;
     
     /* * Gestión del flujo de información del asistente.
      * Permite que los datos capturados en una ventana estén disponibles en otra.

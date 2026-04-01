@@ -26,7 +26,7 @@ public class Taller {
 
     public String getInstructor() {
         return instructor;
-    } // NUEVO GETTER
+    } 
 
     public String[] getHorarios() {
         return horarios;

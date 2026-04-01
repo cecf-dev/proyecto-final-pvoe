@@ -139,7 +139,7 @@ public class LoginFrm extends javax.swing.JFrame {
             if (usuarioLogueado.getRol().equals("ADMIN")) {
                 Compartido.nombreUsuario = "Administrador General";
             } else {
-                Compartido.nombreUsuario = "Encargada de Ventanilla";
+                Compartido.nombreUsuario = "Encargado de Ventanilla";
             }
 
             this.dispose();

@@ -372,6 +372,8 @@ public class AdministracionFrm extends javax.swing.JFrame {
 
         lblHorario.setText("Horario:");
 
+        txtHorario.setEditable(false);
+
         lblHorariosDisp.setText("Horarios Disponibles");
 
         cbHorariosDisp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -860,20 +862,52 @@ public class AdministracionFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = tbConsulta.getSelectedRow();
         if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un asistente primero.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un asistente primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         String id = txtId.getText();
         String nom = txtNombre.getText().trim();
-        String ap1 = txtSegundoApellido.getText().trim();
-        String ap2 = txtPrimerApellido.getText().trim();
+        String ap1 = txtPrimerApellido.getText().trim();
+        String ap2 = txtSegundoApellido.getText().trim();
         String edad = txtEdad.getText().trim();
         String dir = txtADir.getText().trim();
         String telC = txtTelC.getText().trim();
         String telE = txtTelE.getText().trim();
 
         String gen = rbMasculino.isSelected() ? "Masculino" : (rbFemenino.isSelected() ? "Femenino" : "Otro");
+
+        if (nom.isEmpty() || ap1.isEmpty() || telC.isEmpty() || edad.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Los campos Nombre, Primer Apellido, Edad y Teléfono de contacto no pueden estar vacíos.",
+                    "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!esTextoValido(nom) || !esTextoValido(ap1) || (!ap2.isEmpty() && !esTextoValido(ap2))) {
+            JOptionPane.showMessageDialog(this,
+                    "Los nombres y apellidos solo pueden contener letras.",
+                    "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            int edadNum = Integer.parseInt(edad);
+            if (edadNum < 5 || edadNum > 100) {
+                JOptionPane.showMessageDialog(this, "Edad fuera de rango (5-100).", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La edad debe ser un número entero.");
+            return;
+        }
+
+        if (!telC.matches("^[0-9]{1,10}$") || (!telE.isEmpty() && !telE.matches("^[0-9]{1,10}$"))) {
+            JOptionPane.showMessageDialog(this,
+                    "Los teléfonos deben contener solo números (máximo 10 dígitos).",
+                    "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         int confirmacion = JOptionPane.showConfirmDialog(this,
                 "¿Desea actualizar los datos personales de " + nom + "?",
@@ -884,7 +918,7 @@ public class AdministracionFrm extends javax.swing.JFrame {
             if (ge.actualizarDatosAsistente(id, nom, ap1, ap2, edad, gen, dir, telC, telE)) {
                 JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
 
-                String detalles = "Se actualizaron los datos personales del ID: " + id + " (" + nom + " " + ap1 + ")";
+                String detalles = "Se actualizaron los datos personales del ID: " + id;
                 registrarEnBitacora("ACTUALIZAR DATOS", detalles, "");
 
                 String idActual = id;
@@ -899,7 +933,7 @@ public class AdministracionFrm extends javax.swing.JFrame {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Error al actualizar.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al actualizar en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnGuardarAsistenteActionPerformed
@@ -1037,6 +1071,10 @@ public class AdministracionFrm extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             txtTotal.setText("0.0");
         }
+    }
+
+    private boolean esTextoValido(String texto) {
+        return texto.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$");
     }
 
 
