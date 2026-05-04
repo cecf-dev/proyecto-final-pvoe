@@ -370,6 +370,12 @@ public class AdministracionFrm extends javax.swing.JFrame {
 
         txtAsistente.setEditable(false);
 
+        txtCosto.setEditable(false);
+
+        txtCostoMaterial.setEditable(false);
+
+        txtTotal.setEditable(false);
+
         lblHorario.setText("Horario:");
 
         txtHorario.setEditable(false);
